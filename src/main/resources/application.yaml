@@ -1,5 +1,5 @@
 server:
-  port: 8112
+  port: 12001
   servlet:
     context-path: /kenzhekhan-market-core
 spring:

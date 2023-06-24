@@ -53,11 +53,11 @@ create table categories
 );
 
 create table provider (
-                              id                bigserial primary key,
-                              full_name         varchar(255),
-                              address           varchar(255),
-                              phone             varchar(255),
-                              email             varchar(255)
+  id                bigserial primary key,
+  full_name         varchar(255),
+  address           varchar(255),
+  phone             varchar(255),
+  email             varchar(255)
 );
 
 create table goods (
@@ -72,6 +72,7 @@ create table goods (
    press_number      varchar(255),
    warehouse_id      bigint references warehouse (id),
    provider_id       bigint references provider (id),
+   category_id       bigint references categories (id),
    created_at        timestamp default current_timestamp,
    updated_at        timestamp default current_timestamp
 );
