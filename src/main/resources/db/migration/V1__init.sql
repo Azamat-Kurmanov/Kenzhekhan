@@ -1,63 +1,56 @@
-create table seasons (
-   id              bigserial primary key,
-   title           varchar(255) unique
+create table dictionary_tables (
+    id             bigserial primary key,
+    title          varchar(255) unique not null,
+    description    varchar(255),
+    user_id        varchar(255),
+    created_at     timestamp default CURRENT_TIMESTAMP,
+    updated_at     timestamp default CURRENT_TIMESTAMP
 );
 
-insert into seasons (title) values ('Зима'), ('Весна'), ('Лето'), ('Осень');
+insert into dictionary_tables (title, description, user_id)
+values ('seasons', '', 'AZAMAT'), ('warehouse', '', 'AZAMAT'), ('goodsKind', '', 'AZAMAT'), ('typeOfGoods', '', 'AZAMAT'), ('subTypeOfGoods', '', 'AZAMAT'), ('gender', '', 'AZAMAT');
 
-create table warehouse (
-   id              bigserial primary key,
-   title           varchar(255) unique
+create table dictionary_values(
+    id             bigserial primary key,
+    title          varchar(255) not null,
+    tbl_id         bigint not null references dictionary_tables (id),
+    user_id        varchar(255),
+    created_at     timestamp default CURRENT_TIMESTAMP,
+    updated_at     timestamp default CURRENT_TIMESTAMP
 );
 
-insert into warehouse (title) values ('6-ой склад'), ('Новый склад'), ('Кенжехан-2');
-
-create table goodsKind (
-   id              bigserial primary key,
-   title           varchar(255) unique
-);
-
-insert into goodsKind (title) values ('Одежда');
-
-create table typeOfGoods(
-   id              bigserial primary key,
-   title           varchar(255) unique
-);
-
-insert into typeOfGoods (title) values ('Верхняя'), ('Нижняя');
-
-create table subTypeOfGoods(
-   id              bigserial primary key,
-   title           varchar(255) unique
-);
-
-insert into subTypeOfGoods (title) values ('Взрослая'), ('Детская');
-
-create table gender (
-   id              bigserial primary key,
-   title           varchar(255) unique
-);
-
-insert into gender (title) values ('Мужской'), ('Женский');
+insert into dictionary_values (title, tbl_id, user_id) values ('Зима', 1, 'AZAMAT'), ('Весна', 1, 'AZAMAT'), ('Лето', 1, 'AZAMAT'), ('Осень', 1, 'AZAMAT');
+insert into dictionary_values (title, tbl_id, user_id) values ('6-ой склад', 2, 'AZAMAT'), ('Новый склад', 2, 'AZAMAT'), ('Кенжехан-2', 2, 'AZAMAT');
+insert into dictionary_values (title, tbl_id, user_id) values ('Одежда', 3, 'AZAMAT'), ('Верхняя', 4, 'AZAMAT'), ('Нижняя', 4, 'AZAMAT');
+insert into dictionary_values (title, tbl_id, user_id) values ('Взрослая', 5, 'AZAMAT'), ('Детская', 5, 'AZAMAT'), ('Мужской', 6, 'AZAMAT'), ('Женский', 6, 'AZAMAT');
 
 create table categories
 (
    id                   bigserial primary key,
    title                varchar(255),
-   goods_kind_id        bigint references goodsKind (id),
-   seasons_id           bigint references seasons (id),
-   sub_type_of_goods_id bigint references subTypeOfGoods (id),
-   gender_id            bigint references gender (id),
+   goods_kind_id        bigint not null,
+   seasons_id           bigint not null,
+   sub_type_of_goods_id bigint not null,
+   gender_id            bigint not null,
+   user_id              varchar(255),
    created_at           timestamp default current_timestamp,
    updated_at           timestamp default current_timestamp
 );
 
 create table provider (
   id                bigserial primary key,
-  full_name         varchar(255),
+  first_name        varchar(255),
+  last_name         varchar(255),
+  middle_name       varchar(255),
+  country           varchar(255),
+  region            varchar(255),
+  city_village      varchar(255),
   address           varchar(255),
   phone             varchar(255),
-  email             varchar(255)
+  email             varchar(255),
+  user_id           varchar(255),
+  created_at        timestamp default current_timestamp,
+  updated_at        timestamp default current_timestamp
 );
 
 create table goods (
@@ -70,9 +63,11 @@ create table goods (
    quantity          int not null,
    description       varchar(255),
    press_number      varchar(255),
-   warehouse_id      bigint references warehouse (id),
-   provider_id       bigint references provider (id),
-   category_id       bigint references categories (id),
+   warehouse_id      bigint not null,
+   provider_id       bigint not null,
+   category_id       bigint not null,
+   cur_year          int not null,
+   user_id           varchar(255),
    created_at        timestamp default current_timestamp,
    updated_at        timestamp default current_timestamp
 );
