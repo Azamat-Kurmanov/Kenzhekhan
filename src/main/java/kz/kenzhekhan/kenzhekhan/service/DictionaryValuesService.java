@@ -3,7 +3,7 @@ package kz.kenzhekhan.kenzhekhan.service;
 import kz.kenzhekhan.kenzhekhan.converter.DictionaryConverter;
 import kz.kenzhekhan.kenzhekhan.data.DictionaryValuesDto;
 import kz.kenzhekhan.kenzhekhan.dictionary.DictionaryTbl;
-import kz.kenzhekhan.kenzhekhan.entities.DictionaryTables;
+import kz.kenzhekhan.kenzhekhan.entities.DictionaryTablesEntity;
 import kz.kenzhekhan.kenzhekhan.entities.DictionaryValues;
 import kz.kenzhekhan.kenzhekhan.repository.DictionaryValuesRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +47,7 @@ public class DictionaryValuesService {
 
     private List<DictionaryValuesDto> getTblValues(DictionaryTbl tbl) {
         List<DictionaryValuesDto> dictionaries = new ArrayList<>();
-        DictionaryTables table = dictionaryTablesService.getTableByName(tbl.getTitle());
+        DictionaryTablesEntity table = dictionaryTablesService.getTableByName(tbl.getTitle());
         List<DictionaryValues> dictionariesOrigin = dictionaryValuesRepository.findByDictionaries(table);
         DictionaryConverter dictionaryConverter = new DictionaryConverter();
         for (DictionaryValues values: dictionariesOrigin){

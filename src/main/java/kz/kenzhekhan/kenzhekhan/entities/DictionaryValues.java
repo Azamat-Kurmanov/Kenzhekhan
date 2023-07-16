@@ -21,7 +21,7 @@ public class DictionaryValues {
 
     @ManyToOne
     @JoinColumn(name = "tbl_id")
-    private DictionaryTables dictionaries;
+    private DictionaryTablesEntity dictionaries;
 
     @Column(name = "userId")
     private String userId;

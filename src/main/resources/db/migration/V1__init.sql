@@ -1,5 +1,6 @@
 create table dictionary_tables (
     id             bigserial primary key,
+    name_ru        varchar(255) unique not null,
     title          varchar(255) unique not null,
     description    varchar(255),
     user_id        varchar(255),
@@ -7,8 +8,8 @@ create table dictionary_tables (
     updated_at     timestamp default CURRENT_TIMESTAMP
 );
 
-insert into dictionary_tables (title, description, user_id)
-values ('seasons', '', 'AZAMAT'), ('warehouse', '', 'AZAMAT'), ('goodsKind', '', 'AZAMAT'), ('typeOfGoods', '', 'AZAMAT'), ('subTypeOfGoods', '', 'AZAMAT'), ('gender', '', 'AZAMAT');
+insert into dictionary_tables (name_ru, title, description, user_id)
+values ('Сезоны', 'seasons', '', 'AZAMAT'), ('Склад', 'warehouse', '', 'AZAMAT'), ('Вид товара', 'goodsKind', '', 'AZAMAT'), ('Тип товара', 'typeOfGoods', '', 'AZAMAT'), ('Подтип товара','subTypeOfGoods', '', 'AZAMAT'), ('Половой признак','gender', '', 'AZAMAT');
 
 create table dictionary_values(
     id             bigserial primary key,

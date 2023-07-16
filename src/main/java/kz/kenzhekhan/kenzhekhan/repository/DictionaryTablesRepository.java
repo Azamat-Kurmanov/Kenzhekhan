@@ -1,8 +1,12 @@
 package kz.kenzhekhan.kenzhekhan.repository;
 
-import kz.kenzhekhan.kenzhekhan.entities.DictionaryTables;
+import kz.kenzhekhan.kenzhekhan.entities.DictionaryTablesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DictionaryTablesRepository extends JpaRepository<DictionaryTables, Long> {
-    DictionaryTables getDictionaryTablesByTitle(String title);
+import java.util.List;
+
+public interface DictionaryTablesRepository extends JpaRepository<DictionaryTablesEntity, Long> {
+    DictionaryTablesEntity getDictionaryTablesByTitle(String title);
+
+    List<DictionaryTablesEntity> getAllByUserId(String userId);
 }
